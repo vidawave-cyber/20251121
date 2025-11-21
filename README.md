@@ -4,6 +4,22 @@ Python implementation of a binomial option pricing model. Use the `price_option`
 convenience function or the `BinomialPricer` class to value European or American
 calls and puts using a recombining binomial tree.
 
+## Monte Carlo pricing with custom payoffs
+
+If you prefer a simulation-based approach or want to experiment with bespoke
+payoff shapes, run the Monte Carlo helper and enter your own payoff expression
+when prompted. The terminal price is available as `s` (or `S`, `S_T`).
+
+```bash
+python monte_carlo.py
+```
+
+Example payoff inputs:
+
+- `max(s - 100, 0)` – vanilla call
+- `max(90 - s, 0)` – vanilla put
+- `max(10 - abs(s - 100), 0)` – butterfly-style payoff
+
 ## Quick start
 
 ```bash
