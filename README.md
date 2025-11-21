@@ -20,6 +20,36 @@ Example payoff inputs:
 - `max(90 - s, 0)` – vanilla put
 - `max(10 - abs(s - 100), 0)` – butterfly-style payoff
 
+## Web Monte Carlo option calculator
+
+Start a simple Flask server to price options through a browser form or an API
+endpoint:
+
+```bash
+pip install -r requirements.txt
+python web_app.py  # defaults to http://localhost:8000
+```
+
+From the browser, fill in the spot, rate, volatility, maturity, dividend yield,
+number of Monte Carlo paths, and your payoff expression (uses the same `s`/`S`
+notation). Submitting the form will display the estimated option price.
+
+For automated workflows, you can also POST JSON to `/api/price`:
+
+```bash
+curl -X POST http://localhost:8000/api/price \
+  -H "Content-Type: application/json" \
+  -d '{
+        "spot": 100,
+        "rate": 0.05,
+        "volatility": 0.2,
+        "maturity": 1.0,
+        "dividend": 0.0,
+        "paths": 15000,
+        "payoff": "max(s - 100, 0)"
+      }'
+```
+
 ## Quick start
 
 ```bash
